@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Urgences"
+    },
+    {
+        "id": 2,
+        "name": "IRM"
+    },
+    {
+        "id": 3,
+        "name": "Echo"
+    },
+    {
+        "id": 4,
+        "name": "Dentaire"
+    },
+    {
+        "id": 5,
+        "name": "Radio"
+    },
+    {
+        "id": 6,
+        "name": "Chirurgie"
+    }
+]

@@ -1,0 +1,77 @@
+[
+    {
+        "id": 1,
+        "first_name": "Rookie",
+        "last_name": "Cruz"
+    },
+    {
+        "id": 2,
+        "first_name": "Malik",
+        "last_name": "Patterson"
+    },
+    {
+        "id": 3,
+        "first_name": "Babette",
+        "last_name": "Robertson"
+    },
+    {
+        "id": 4,
+        "first_name": "Blacula",
+        "last_name": "Olson"
+    },
+    {
+        "id": 5,
+        "first_name": "Oliver",
+        "last_name": "Brown"
+    },
+    {
+        "id": 6,
+        "first_name": "Egeus",
+        "last_name": "Duncan"
+    },
+    {
+        "id": 7,
+        "first_name": "Ned",
+        "last_name": "Patterson"
+    },
+    {
+        "id": 8,
+        "first_name": "Nathan",
+        "last_name": "Matthews"
+    },
+    {
+        "id": 9,
+        "first_name": "Nour",
+        "last_name": "Miller"
+    },
+    {
+        "id": 10,
+        "first_name": "Stanislaus",
+        "last_name": "Phillips"
+    },
+    {
+        "id": 11,
+        "first_name": "Sora",
+        "last_name": "Carter"
+    },
+    {
+        "id": 12,
+        "first_name": "Thomas",
+        "last_name": "Holmes"
+    },
+    {
+        "id": 13,
+        "first_name": "Kit",
+        "last_name": "Allen"
+    },
+    {
+        "id": 14,
+        "first_name": "Bedrich",
+        "last_name": "Duncan"
+    },
+    {
+        "id": 15,
+        "first_name": "Maximilian",
+        "last_name": "Morri"
+    }
+]

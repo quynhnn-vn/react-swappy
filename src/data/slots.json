@@ -1,0 +1,110 @@
+[
+    {
+      "id": 1,
+      "service_id": 1,
+      "name": "Matin",
+      "color": "#7F9CC7"
+    },
+    {
+      "id": 2,
+      "service_id": 2,
+      "name": "Matin",
+      "color": "#7F9CC7"
+    },
+    {
+      "id": 3,
+      "service_id": 3,
+      "name": "Matin",
+      "color": "#7F9CC7"
+    },
+    {
+      "id": 4,
+      "service_id": 4,
+      "name": "Matin",
+      "color": "#7F9CC7"
+    },
+    {
+      "id": 5,
+      "service_id": 5,
+      "name": "Matin",
+      "color": "#7F9CC7"
+    },
+    {
+      "id": 6,
+      "service_id": 6,
+      "name": "Matin",
+      "color": "#7F9CC7"
+    },
+    {
+      "id": 7,
+      "service_id": 1,
+      "name": "Après-midi",
+      "color": "#2B4162"
+    },
+    {
+      "id": 8,
+      "service_id": 2,
+      "name": "Après-midi",
+      "color": "#2B4162"
+    },
+    {
+      "id": 9,
+      "service_id": 3,
+      "name": "Après-midi",
+      "color": "#2B4162"
+    },
+    {
+      "id": 10,
+      "service_id": 4,
+      "name": "Après-midi",
+      "color": "#2B4162"
+    },
+    {
+      "id": 11,
+      "service_id": 5,
+      "name": "Après-midi",
+      "color": "#2B4162"
+    },
+    {
+      "id": 12,
+      "service_id": 6,
+      "name": "Après-midi",
+      "color": "#2B4162"
+    },
+    {
+      "id": 13,
+      "service_id": 1,
+      "name": "Soir",
+      "color": "#020969"
+    },
+    {
+      "id": 14,
+      "service_id": 2,
+      "name": "Soir",
+      "color": "#020969"
+    },
+    {
+      "id": 15,
+      "service_id": 3,
+      "name": "Soir",
+      "color": "#020969"
+    },
+    {
+      "id": 16,
+      "service_id": 4,
+      "name": "Soir",
+      "color": "#020969"
+    },
+    {
+      "id": 17,
+      "service_id": 5,
+      "name": "Soir",
+      "color": "#020969"
+    },
+    {
+      "id": 18,
+      "service_id": 6,
+      "name": "Soir",
+      "color": "#020969"
+    }
+  ]
