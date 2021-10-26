@@ -9,7 +9,7 @@ export default function PlanningHeader({
     return (
         <div>
             <button onClick={handlePrevWeek}>Prev Week</button>
-            <h3>{currentWeek[0] && getWeekOfYear(currentWeek[0])}</h3>
+            <h3>{getWeekOfYear(currentWeek[0])}</h3>
             <button onClick={handleNextWeek}>Next Week</button>
         </div>
     );
