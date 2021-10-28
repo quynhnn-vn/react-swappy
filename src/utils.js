@@ -10,9 +10,6 @@ export const formatDate = (date) => {
 export const formatDateForHeader = (date) => {
     return format(new Date(date), "eeedd", { locale: fr }).toUpperCase();
 };
-export const getWeekIndex = (date) => {
-    return getWeek(new Date(date));
-};
 export const getWeekOfYear = (date) => {
     const weekOfYear = getWeek(new Date(date));
     const monthOfYear = format(new Date(date), "LLL", {

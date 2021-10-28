@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import servicesData from "../../data/services.json";
+import slotsData from "../../data/slots.json";
 
 /* Services state has form: 
     services: [
@@ -30,8 +31,8 @@ export const servicesSlice = createSlice({
             state.services = [...state.services, newState];
         },
         //action.payload has form : ["id1", "id2"]
-        getSlots: (state, action) => {
-            const slots = action.payload;
+        getSlots: (state) => {
+            const slots = slotsData;
             state.services = state.services.map((service) => ({
                 ...service,
                 slotsId: slots

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import slotsData from "../../data/slots.json";
+import eventsData from "../../data/events.json";
+
 /* Slots state has form:
     slots : [
         {
@@ -23,8 +25,8 @@ export const slotsSlice = createSlice({
                 eventsId: []
             }));
         },
-        getEvents: (state, action) => {
-            const events = action.payload;
+        getEvents: (state) => {
+            const events = eventsData;
             state.slots = state.slots.map((slot) => ({
                 ...slot,
                 eventsId: events
