@@ -23,7 +23,6 @@ function App() {
     const [isClicked, setIsClicked] = useState(false);
     // Array contains all re-structured data elements, each element is an object containing data of a service
     const [data, setData] = useState([]);
-
     useEffect(() => {
         setData(services.map((service) => reStructure(service)));
 
