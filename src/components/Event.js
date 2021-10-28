@@ -1,32 +1,20 @@
 import React, { useState } from "react";
-import { getColor, getUser } from "../utils";
-import EventDetails from "./EvenDetails";
+import { getUser, getColor } from "../utils";
+import EventDetails from "./EventDetails";
 
-export default function Event({ event, slotId }) {
+export default function Event({ event }) {
     const [isEdited, setIsEdited] = useState(false);
-    const [editedEvent, setEditedEvent] = useState({
-        name: "",
-        slot: "",
-        user: ""
-    });
     const style = {
-        backgroundColor: getColor(slotId)
+        backgroundColor: getColor(event.slot_id)
     };
-    const handleEdit = () => {
-        setIsEdited(!isEdited);
-    };
+
     return (
-        <span>
-            <button style={style}>
-                {getUser(event.user_id)}
-                {isEdited && (
-                    <EventDetails
-                        editedEvent={editedEvent}
-                        setEditedEvent={setEditedEvent}
-                    />
-                )}
+        <div style={style}>
+            {getUser(event.user_id)}
+            <button onClick={() => setIsEdited(!isEdited)}>
+                {isEdited ? "Hide" : "Edit"}
             </button>
-            <button onClick={handleEdit}>{isEdited ? "Hide" : "Edit"}</button>
-        </span>
+            {isEdited && <EventDetails />}
+        </div>
     );
 }

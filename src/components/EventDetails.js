@@ -1,17 +1,27 @@
-import React from "react";
-import users from "../data/users.json";
-import services from "../data/services.json";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-export default function EventDetails({ editedEvent, setEditedEvent }) {
+export default function EventDetails() {
+    //const dispatch = useDispatch();
+    const [editedEvent, setEditedEvent] = useState({
+        serviceName: "",
+        slotName: "",
+        userName: "",
+        date: ""
+    });
+    // useEffect(() => {
+    //     dispatch(editEvent(editedEvent));
+    // }, [dispatch])
+    const services = useSelector((state) => state.services.services);
+    const users = useSelector((state) => state.users.users);
     return (
         <form>
-            <label>Select a service: </label>
             <select
-                value={editedEvent.name}
+                value={editedEvent.serviceName}
                 onChange={(e) =>
                     setEditedEvent({
                         ...editedEvent,
-                        name: e.target.value
+                        serviceName: e.target.value
                     })
                 }
             >
@@ -21,13 +31,12 @@ export default function EventDetails({ editedEvent, setEditedEvent }) {
                     </option>
                 ))}
             </select>
-            <label>Select a slot: </label>
             <select
-                value={editedEvent.slot}
+                value={editedEvent.slotName}
                 onChange={(e) =>
                     setEditedEvent({
                         ...editedEvent,
-                        slot: e.target.value
+                        slotName: e.target.value
                     })
                 }
             >
@@ -37,13 +46,12 @@ export default function EventDetails({ editedEvent, setEditedEvent }) {
                     </option>
                 ))}
             </select>
-            <label>Select a user: </label>
             <select
-                value={editedEvent.user}
+                value={editedEvent.userName}
                 onChange={(e) =>
                     setEditedEvent({
                         ...editedEvent,
-                        user: e.target.value
+                        userName: e.target.value
                     })
                 }
             >
@@ -53,6 +61,16 @@ export default function EventDetails({ editedEvent, setEditedEvent }) {
                     </option>
                 ))}
             </select>
+            <input
+                type="date"
+                value={editedEvent.date}
+                onChange={(e) =>
+                    setEditedEvent({
+                        ...editedEvent,
+                        date: e.target.value
+                    })
+                }
+            />
             <input type="submit" value="Submit" />
         </form>
     );
