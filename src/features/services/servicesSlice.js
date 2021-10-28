@@ -42,5 +42,4 @@ export const servicesSlice = createSlice({
     }
 });
 export const { loadServices, addService, getSlots } = servicesSlice.actions;
-export const selectServices = (state) => state.services.services;
 export default servicesSlice.reducer;

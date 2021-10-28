@@ -38,5 +38,4 @@ export const weekSlice = createSlice({
     }
 });
 export const { loadWeek, getPrevWeek, getNextWeek } = weekSlice.actions;
-export const selectWeek = (state) => state.week.week;
 export default weekSlice.reducer;

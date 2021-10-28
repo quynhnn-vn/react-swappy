@@ -1,10 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getNextWeek, getPrevWeek, selectWeek } from "./weekSlice";
+import { useDispatch } from "react-redux";
+import { getNextWeek, getPrevWeek } from "../features/week/weekSlice";
 
-export default function Week() {
+export default function SwitchWeek() {
     const dispatch = useDispatch();
-    const week = useSelector(selectWeek);
     const handlePrevWeek = () => {
         dispatch(getPrevWeek());
     };
@@ -15,7 +14,6 @@ export default function Week() {
         <div>
             <button onClick={handlePrevWeek}>Prev Week</button>
             <button onClick={handleNextWeek}>Next Week</button>
-            <p key={week.index}>{week.dates && week.dates.toString()}</p>
         </div>
     );
 }

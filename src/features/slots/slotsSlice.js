@@ -35,5 +35,4 @@ export const slotsSlice = createSlice({
     }
 });
 export const { loadSlots, getEvents } = slotsSlice.actions;
-export const selectSlots = (state) => state.slots.slots;
 export default slotsSlice.reducer;
