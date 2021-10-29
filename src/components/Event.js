@@ -8,12 +8,11 @@ export default function Event({ event }) {
         backgroundColor: getColor(event.slot_id)
     };
     return (
-        <div style={style}>
-            {getUser(event.user_id)}
-            <button onClick={() => setIsEdited(!isEdited)}>
-                {isEdited ? "Hide" : "Edit"}
+        <>
+            <button onClick={() => setIsEdited(!isEdited)} style={style}>
+                {getUser(event.user_id)}
             </button>
-            {isEdited && <EventDetails eventId={event.id} />}
-        </div>
+            {isEdited && <EventDetails event={event} />}
+        </>
     );
 }

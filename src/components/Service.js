@@ -11,10 +11,9 @@ export default function Service({ service }) {
 
     const eventsIdForSlot = slotsId.map((slotId) => {
         const slot = slots.find((slot) => slot.id === slotId);
-        return [...new Set(slot.eventsId)];
+        return slot.eventsId;
     });
 
-    console.log(slots[0]);
     const eventsForService = eventsIdForSlot
         .map((eventsId) =>
             eventsId.map((eventId) =>
