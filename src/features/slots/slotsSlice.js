@@ -33,8 +33,21 @@ export const slotsSlice = createSlice({
                     .filter((event) => event.slot_id === slot.id)
                     .map((event) => event.id)
             }));
+        },
+        // action.payload has form: {eventId: "",serviceId: "", slotId: "", userId: "", "date": ""}
+        editSlot: (state, action) => {
+            const index = state.slots.findIndex(
+                (slot) => slot.id === action.payload.slotId
+            );
+            const editedSlot = {
+                ...state.slots[index],
+                service_id: action.payload.serviceId
+            };
+            state.slots = state.slots.map((slot) =>
+                slot.id === action.payload.slotId ? editedSlot : slot
+            );
         }
     }
 });
-export const { loadSlots, getEvents } = slotsSlice.actions;
+export const { loadSlots, getEvents, editSlot } = slotsSlice.actions;
 export default slotsSlice.reducer;

@@ -1,57 +1,68 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { editEventAndSlot } from "../features/events/eventsSlice";
 
-export default function EventDetails() {
-    //const dispatch = useDispatch();
+export default function EventDetails({ eventId }) {
+    const dispatch = useDispatch();
+    //const events = useSelector((state) => state.events.events);
+
     const [editedEvent, setEditedEvent] = useState({
-        serviceName: "",
-        slotName: "",
-        userName: "",
+        eventId: eventId,
+        serviceId: 0,
+        slotId: 0,
+        userId: 0,
         date: ""
     });
-    // useEffect(() => {
-    //     dispatch(editEvent(editedEvent));
-    // }, [dispatch])
     const services = useSelector((state) => state.services.services);
     const users = useSelector((state) => state.users.users);
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        dispatch(editEventAndSlot(editedEvent));
+    };
+
     return (
-        <form>
+        <form onSubmit={handleOnSubmit}>
             <select
-                value={editedEvent.serviceName}
+                value={editedEvent.serviceId}
                 onChange={(e) =>
                     setEditedEvent({
                         ...editedEvent,
-                        serviceName: e.target.value
+                        serviceId: Number(e.target.value)
                     })
                 }
             >
                 {services.map((service) => (
-                    <option key={service.id} value={service.name}>
+                    <option key={service.id} value={service.id}>
                         {service.name}
                     </option>
                 ))}
             </select>
             <select
-                value={editedEvent.slotName}
+                value={editedEvent.slotId}
                 onChange={(e) =>
                     setEditedEvent({
                         ...editedEvent,
-                        slotName: e.target.value
+                        slotId: Number(e.target.value)
                     })
                 }
             >
-                {["Matin", "AM", "Soir"].map((slot, index) => (
-                    <option key={index} value={slot}>
-                        {slot}
+                {[
+                    { id: 1, name: "Matin" },
+                    { id: 2, name: "AM" },
+                    { id: 3, name: "Soir" }
+                ].map((slot) => (
+                    <option key={slot.id} value={slot.id}>
+                        {slot.name}
                     </option>
                 ))}
             </select>
             <select
-                value={editedEvent.userName}
+                value={editedEvent.userId}
                 onChange={(e) =>
                     setEditedEvent({
                         ...editedEvent,
-                        userName: e.target.value
+                        userId: Number(e.target.value)
                     })
                 }
             >

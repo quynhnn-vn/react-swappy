@@ -21,6 +21,7 @@ export default function App() {
         dispatch(getSlots());
         dispatch(getEvents());
     }, [dispatch]);
+
     return (
         <div>
             <SwitchWeek />
