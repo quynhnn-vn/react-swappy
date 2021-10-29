@@ -15,6 +15,13 @@ export default function EventDetails({ event }) {
         date: event.date
     });
 
+    const [matin, am, soir] = [
+        slots.filter((slot) => slot.name === "Matin"),
+        slots.filter((slot) => slot.name === "Après-midi"),
+        slots.filter((slot) => slot.name === "Soir")
+    ];
+    const distinctSlots = [matin[0], am[0], soir[0]];
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
         dispatch(editEvent(editedEvent));
@@ -31,7 +38,7 @@ export default function EventDetails({ event }) {
                     })
                 }
             >
-                {slots.map((slot) => (
+                {distinctSlots.map((slot) => (
                     <option key={slot.id} value={slot.id}>
                         {slot.name}
                     </option>
