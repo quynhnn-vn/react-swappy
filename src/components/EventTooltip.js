@@ -76,7 +76,12 @@ export default function EventTooltip({ children, event }) {
                     <input type="submit" value="Submit" />
                 </form>
             </div>
-            <div onClick={() => setIsEdited(!isEdited)}>{children}</div>
+            <div
+                className="edit-container"
+                onClick={() => setIsEdited(!isEdited)}
+            >
+                {children}
+            </div>
         </div>
     );
 }

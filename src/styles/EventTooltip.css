@@ -16,3 +16,8 @@
 .tooltip-box.visible {
     display: block;
 }
+
+.edit-container {
+    display: flex;
+    flex-direction: row;
+}

@@ -7,7 +7,7 @@ export const formatDate = (date) => {
     return format(new Date(date), "yyyy-MM-dd");
 };
 export const formatDateForHeader = (date) => {
-    return format(new Date(date), "eeedd", { locale: fr }).toUpperCase();
+    return format(new Date(date), "eee dd", { locale: fr }).toUpperCase();
 };
 export const getWeekOfYear = (date) => {
     const weekOfYear = getWeek(new Date(date));

@@ -20,8 +20,8 @@ export default function Table() {
     return (
         <div className="table-container">
             <table>
-                <thead>{renderHeader()}</thead>
-                <tbody>
+                <thead className="table-header">{renderHeader()}</thead>
+                <tbody className="table-body">
                     {services.map((service) => (
                         <tr key={service.id}>
                             <Service service={service} />

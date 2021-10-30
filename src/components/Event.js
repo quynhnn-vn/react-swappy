@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Event.css";
 import { getUser, getColor } from "../utils";
 import EventTooltip from "./EventTooltip";
 
@@ -8,7 +9,9 @@ export default function Event({ event }) {
     };
     return (
         <EventTooltip event={event}>
-            <button style={style}>{getUser(event.user_id)}</button>
+            <button className="event-btn" style={style}>
+                {getUser(event.user_id)}
+            </button>
         </EventTooltip>
     );
 }
