@@ -1,7 +1,6 @@
 import { addDays, format, startOfWeek, getWeek } from "date-fns";
 import { fr } from "date-fns/locale";
 import slots from "./data/slots.json";
-import events from "./data/events.json";
 import users from "./data/users.json";
 
 export const formatDate = (date) => {
@@ -15,7 +14,7 @@ export const getWeekOfYear = (date) => {
     const monthOfYear = format(new Date(date), "LLL", {
         locale: fr
     }).toUpperCase();
-    return monthOfYear + "-semaine " + weekOfYear;
+    return monthOfYear + " - semaine " + weekOfYear;
 };
 export const getCurrentWeek = () => {
     const currentDate = new Date();
@@ -27,20 +26,6 @@ export const getCurrentWeek = () => {
         formattedWeekDate.push(formatDate(weekDate[i]));
     }
     return formattedWeekDate;
-};
-export const reStructure = (service) => {
-    const slotsForService = slots.filter(
-        (slot) => slot.service_id === service.id
-    );
-    const eventsForSlots = slotsForService.map((slot) =>
-        events.filter((event) => event.slot_id === slot.id)
-    );
-    return {
-        id: service.id,
-        name: service.name,
-        slotsForService: slotsForService,
-        eventsForSlots: eventsForSlots.flat()
-    };
 };
 export const getUser = (userId) => {
     const foundUser = users.find((user) => user.id === userId);

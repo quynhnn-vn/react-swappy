@@ -1,0 +1,25 @@
+.switch-container {
+    width: 100%;
+    height: 70px;
+    background: var(--grey);
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.switch-btn {
+    display: flex;
+    align-items: center;
+    background: var(--grey);
+    border: none;
+}
+.switch-span {
+    background: var(--white);
+    padding: 5px 10px;
+    font-size: 14px;
+    border: solid 1px var(--black);
+    border-radius: 5px;
+}
+.switch-icon {
+    font-size: 22px;
+}

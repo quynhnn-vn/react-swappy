@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Table.css";
 import { useSelector } from "react-redux";
 import { formatDateForHeader } from "../utils";
 import Service from "./Service";
@@ -17,17 +18,17 @@ export default function Table() {
             </th>
         ));
     return (
-        <table>
-            <thead>
-                <tr>{renderHeader()}</tr>
-            </thead>
-            <tbody>
-                {services.map((service) => (
-                    <tr key={service.id}>
-                        <Service service={service} />
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div className="table-container">
+            <table>
+                <thead>{renderHeader()}</thead>
+                <tbody>
+                    {services.map((service) => (
+                        <tr key={service.id}>
+                            <Service service={service} />
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }
