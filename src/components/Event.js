@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { getUser, getColor } from "../utils";
-import EventDetails from "./EventDetails";
+import EventTooltip from "./EventTooltip";
 
 export default function Event({ event }) {
-    const [isEdited, setIsEdited] = useState(false);
     const style = {
         backgroundColor: getColor(event.slot_id)
     };
     return (
-        <>
-            <button onClick={() => setIsEdited(!isEdited)} style={style}>
-                {getUser(event.user_id)}
-            </button>
-            {isEdited && <EventDetails event={event} />}
-        </>
+        <EventTooltip event={event}>
+            <button style={style}>{getUser(event.user_id)}</button>
+        </EventTooltip>
     );
 }

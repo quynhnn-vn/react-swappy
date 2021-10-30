@@ -9,15 +9,15 @@ export default function Table() {
 
     const renderHeader = () =>
         week.dates &&
-        ["SERVICES", ...week.dates].map((date, index) => (
+        ["CRÉNEAUX", ...week.dates].map((date, index) => (
             <th key={index}>
-                {date !== "SERVICES"
+                {date !== "CRÉNEAUX"
                     ? formatDateForHeader(new Date(date))
                     : date}
             </th>
         ));
     return (
-        <table border={1}>
+        <table>
             <thead>
                 <tr>{renderHeader()}</tr>
             </thead>

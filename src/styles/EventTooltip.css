@@ -1,0 +1,18 @@
+.tooltip-container {
+    position: relative;
+}
+
+.tooltip-box {
+    position: absolute;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    top: calc(100% + 5px);
+    display: none;
+}
+
+.tooltip-box.visible {
+    display: block;
+}

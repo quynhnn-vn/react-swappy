@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./App.css";
+import "./styles/App.css";
 import { useDispatch } from "react-redux";
 import { loadEvents } from "./features/events/eventsSlice";
 import { getSlots, loadServices } from "./features/services/servicesSlice";
