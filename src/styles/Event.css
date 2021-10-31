@@ -4,5 +4,10 @@
     min-height: 30px;
     min-width: 50px;
     color: var(--white);
-    padding: 0 25px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.event-btn:hover,
+.event-btn:focus {
+    opacity: 1;
 }

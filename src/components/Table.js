@@ -3,6 +3,7 @@ import "../styles/Table.css";
 import { useSelector } from "react-redux";
 import { formatDateForHeader } from "../utils";
 import Service from "./Service";
+import SwitchWeek from "./SwitchWeek";
 
 export default function Table() {
     const week = useSelector((state) => state.week.week);
@@ -19,6 +20,8 @@ export default function Table() {
         ));
     return (
         <div className="table-container">
+            <SwitchWeek />
+
             <table>
                 <thead className="table-header">{renderHeader()}</thead>
                 <tbody className="table-body">
