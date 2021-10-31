@@ -9,12 +9,29 @@
     font-size: 17px;
     text-align: center;
 }
-.table-header th {
-    padding: 20px 15px;
+.table-header tr th {
+    min-width: 120px;
 }
-.table-header .current-date {
+.table-header .date-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.table-header .date-header span {
+    padding: 5px;
+}
+.table-header .current-date-span {
     background: var(--dark-blue);
+    color: var(--white);
+    border-radius: 50%;
 }
+/* .table-header .slot-header {
+    width: 100%;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+} */
 .table-body tr td:first-child {
     padding-left: 20px;
     text-align: left;

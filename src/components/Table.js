@@ -12,26 +12,35 @@ export default function Table() {
     const renderDate = () =>
         week.dates &&
         ["CRÉNEAUX", ...week.dates].map((date, index) => (
-            <th
-                key={index}
-                className={
-                    date === formatDate(new Date()) ? "current-date" : null
-                }
-            >
-                {console.log(date === formatDate(new Date()))}
-                {date !== "CRÉNEAUX"
-                    ? formatDateForHeader(new Date(date))
-                    : date}
+            <th key={index}>
+                {date !== "CRÉNEAUX" ? (
+                    <div className="date-header">
+                        <span>
+                            {formatDateForHeader(new Date(date)).substr(0, 4)}
+                        </span>
+                        <span
+                            className={
+                                date === formatDate(new Date())
+                                    ? "current-date-span"
+                                    : null
+                            }
+                        >
+                            {formatDateForHeader(new Date(date)).substr(-2)}
+                        </span>
+                    </div>
+                ) : (
+                    <span>{date}</span>
+                )}
             </th>
         ));
     const renderSlot = () => {
         week.dates &&
             ["CRÉNEAUX", ...week.dates].map((date, index) => (
-                <th key={index}>
+                <td key={index}>
                     {date !== "CRÉNEAUX"
                         ? formatDateForHeader(new Date(date))
                         : date}
-                </th>
+                </td>
             ));
     };
     return (
