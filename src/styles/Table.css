@@ -12,6 +12,9 @@
 .table-header th {
     padding: 20px 15px;
 }
+.table-header .current-date {
+    background: var(--dark-blue);
+}
 .table-body tr td:first-child {
     padding-left: 20px;
     text-align: left;

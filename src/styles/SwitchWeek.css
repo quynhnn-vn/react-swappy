@@ -12,6 +12,7 @@
     align-items: center;
     background: var(--grey);
     border: none;
+    cursor: pointer;
 }
 .switch-span {
     background: var(--white);
