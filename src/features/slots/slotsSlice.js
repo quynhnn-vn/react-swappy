@@ -41,4 +41,21 @@ export const slotsSlice = createSlice({
     }
 });
 export const { loadSlots, getEvents } = slotsSlice.actions;
+export const selectMatinEvents = (state) =>
+    state.slots.slots
+        .filter((slot) => slot.name === "Matin")
+        .map((slot) => slot.eventsId)
+        .flat(2);
+
+export const selectAMEvents = (state) =>
+    state.slots.slots
+        .filter((slot) => slot.name === "Après-midi")
+        .map((slot) => slot.eventsId)
+        .flat(2);
+
+export const selectSoirEvents = (state) =>
+    state.slots.slots
+        .filter((slot) => slot.name === "Soir")
+        .map((slot) => slot.eventsId)
+        .flat(2);
 export default slotsSlice.reducer;

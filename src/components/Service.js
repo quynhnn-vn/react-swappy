@@ -8,7 +8,6 @@ export default function Service({ service }) {
     const events = useSelector((state) => state.events.events);
 
     const slotsId = service.slotsId;
-
     const eventsIdForSlot = slotsId.map((slotId) => {
         const slot = slots.find((slot) => slot.id === slotId);
         return slot.eventsId;
@@ -21,6 +20,7 @@ export default function Service({ service }) {
             )
         )
         .flat(2);
+
     return (
         <>
             <td>{service.name}</td>
@@ -29,11 +29,10 @@ export default function Service({ service }) {
                     (event) => event.date === date
                 );
                 return (
-                    <td key={index}>
-                        <Day
-                            eventsForServiceAndDate={eventsForServiceAndDate}
-                        />
-                    </td>
+                    <Day
+                        key={index}
+                        eventsForServiceAndDate={eventsForServiceAndDate}
+                    />
                 );
             })}
         </>

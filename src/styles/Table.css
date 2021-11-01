@@ -1,5 +1,4 @@
 .table-container table {
-    width: 70%;
     font-size: 15px;
     min-width: 400px;
     min-height: 300px;
@@ -9,8 +8,12 @@
     font-size: 17px;
     text-align: center;
 }
+.table-header tr th:first-of-type {
+    padding: 0 20px;
+    text-align: left;
+}
 .table-header tr th {
-    min-width: 120px;
+    width: 60px;
 }
 .table-header .date-header {
     display: flex;
@@ -26,18 +29,12 @@
     color: var(--white);
     border-radius: 50%;
 }
-/* .table-header .slot-header {
-    width: 100%;
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;
-} */
+
 .table-body tr td:first-child {
     padding-left: 20px;
     text-align: left;
 }
 .table-body tr td {
-    padding: 12px auto;
     border-right: solid 1px var(--grey);
 }
 

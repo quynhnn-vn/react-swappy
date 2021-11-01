@@ -6,7 +6,6 @@
     position: absolute;
     display: none;
     z-index: 100;
-    min-width: 270px;
     background: var(--white);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 15px 25px;
