@@ -8,6 +8,7 @@ export default function Service({ service }) {
     const events = useSelector((state) => state.events.events);
 
     const slotsId = service.slotsId;
+
     const eventsIdForSlot = slotsId.map((slotId) => {
         const slot = slots.find((slot) => slot.id === slotId);
         return slot.eventsId;

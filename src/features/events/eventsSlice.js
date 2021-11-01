@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import eventsData from "../../data/events.json";
+import { editEventsId } from "../slots/slotsSlice";
 /*
 events: [
     {
@@ -10,6 +11,12 @@ events: [
     }
 ];
  */
+export const editEventsAndUpdateSlot = (payload) => {
+    return (dispatch) => {
+        dispatch(editEvent(payload));
+        dispatch(editEventsId(payload));
+    };
+};
 export const eventsSlice = createSlice({
     name: "events",
     initialState: {
@@ -20,7 +27,7 @@ export const eventsSlice = createSlice({
             state.events = eventsData;
         },
         /* action.payload has form: 
-        {id: '456', user_id: '16', slot_id: '123', date: "2021-10-22"}
+        {id: '456', user_id: '16', old_slot_id: '123', new_slot_id: '23', date: "2021-10-22"}
         */
         editEvent: (state, action) => {
             const index = state.events.findIndex(
@@ -28,8 +35,8 @@ export const eventsSlice = createSlice({
             );
             const editedEvent = {
                 ...state.events[index],
+                slot_id: action.payload.new_slot_id,
                 user_id: action.payload.user_id,
-                slot_id: action.payload.slot_id,
                 date: action.payload.date
             };
             state.events = [

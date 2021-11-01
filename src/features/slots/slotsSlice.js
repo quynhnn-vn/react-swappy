@@ -37,25 +37,42 @@ export const slotsSlice = createSlice({
                     )
                 ]
             }));
+        },
+        /* action.payload has form: 
+        {id: '456', user_id: '16', old_slot_id: '123', new_slot_id: '23', date: "2021-10-22"}
+        */
+        editEventsId: (state, action) => {
+            const oldIndex = state.slots.findIndex(
+                (slot) => slot.id === action.payload.old_slot_id
+            );
+            const newIndex = state.slots.findIndex(
+                (slot) => slot.id === action.payload.new_slot_id
+            );
+            const editedOldSlot = {
+                ...state.slots[oldIndex],
+                eventsId: state.slots[oldIndex].eventsId.filter(
+                    (eventId) => eventId !== action.payload.id
+                )
+            };
+            const editedNewSlot = {
+                ...state.slots[newIndex],
+                eventsId: [...state.slots[newIndex].eventsId, action.payload.id]
+            };
+            state.slots = [
+                ...new Set(
+                    state.slots.map((slot) => {
+                        if (slot.id === action.payload.old_slot_id) {
+                            return editedOldSlot;
+                        } else if (slot.id === action.payload.new_slot_id) {
+                            return editedNewSlot;
+                        } else {
+                            return slot;
+                        }
+                    })
+                )
+            ];
         }
     }
 });
-export const { loadSlots, getEvents } = slotsSlice.actions;
-export const selectMatinEvents = (state) =>
-    state.slots.slots
-        .filter((slot) => slot.name === "Matin")
-        .map((slot) => slot.eventsId)
-        .flat(2);
-
-export const selectAMEvents = (state) =>
-    state.slots.slots
-        .filter((slot) => slot.name === "Après-midi")
-        .map((slot) => slot.eventsId)
-        .flat(2);
-
-export const selectSoirEvents = (state) =>
-    state.slots.slots
-        .filter((slot) => slot.name === "Soir")
-        .map((slot) => slot.eventsId)
-        .flat(2);
+export const { loadSlots, getEvents, editEventsId } = slotsSlice.actions;
 export default slotsSlice.reducer;

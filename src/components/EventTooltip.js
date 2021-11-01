@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/EventTooltip.css";
 import { useSelector, useDispatch } from "react-redux";
-import { editEvent } from "../features/events/eventsSlice";
+import { editEventsAndUpdateSlot } from "../features/events/eventsSlice";
 
 export default function EventTooltip({ children, event }) {
     const dispatch = useDispatch();
@@ -9,7 +9,8 @@ export default function EventTooltip({ children, event }) {
     const [isEdited, setIsEdited] = useState(false);
     const [editedEvent, setEditedEvent] = useState({
         id: event.id,
-        slot_id: event.slot_id,
+        old_slot_id: event.slot_id,
+        new_slot_id: event.slot_id,
         user_id: event.user_id,
         date: event.date
     });
@@ -17,18 +18,11 @@ export default function EventTooltip({ children, event }) {
     const users = useSelector((state) => state.users.users);
     const slots = useSelector((state) => state.slots.slots);
 
-    const distinctSlots = [
-        slots.find((slot) => slot.name === "Matin"),
-        slots.find((slot) => slot.name === "Après-midi"),
-        slots.find((slot) => slot.name === "Soir")
-    ];
-
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        dispatch(editEvent(editedEvent));
+        dispatch(editEventsAndUpdateSlot(editedEvent));
         setIsEdited(false);
     };
-
     return (
         <div className="tooltip-container">
             <div className={isEdited ? "tooltip-box visible" : "tooltip-box"}>
@@ -37,15 +31,15 @@ export default function EventTooltip({ children, event }) {
                     <div className="input-container">
                         Créneau:
                         <select
-                            value={editedEvent.slot_id}
+                            value={editedEvent.new_slot_id}
                             onChange={(e) =>
                                 setEditedEvent({
                                     ...editedEvent,
-                                    slot_id: Number(e.target.value)
+                                    new_slot_id: Number(e.target.value)
                                 })
                             }
                         >
-                            {distinctSlots.map((slot) => (
+                            {slots.map((slot) => (
                                 <option key={slot.id} value={slot.id}>
                                     {slot.name}
                                 </option>
