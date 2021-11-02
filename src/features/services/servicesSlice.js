@@ -26,11 +26,6 @@ export const servicesSlice = createSlice({
                 slotsId: []
             }));
         },
-        addService: (state, action) => {
-            const newState = { ...action.payload, slotsId: [] };
-            state.services = [...state.services, newState];
-        },
-        //action.payload has form : ["id1", "id2"]
         getSlots: (state) => {
             const slots = slotsData;
             state.services = state.services.map((service) => ({
@@ -39,8 +34,30 @@ export const servicesSlice = createSlice({
                     .filter((slot) => slot.service_id === service.id)
                     .map((slot) => slot.id)
             }));
+        },
+        /* action.payload has form:
+        { id: event.id, old_slot_id: event.slot_id, new_slot_id: uuid(), slot_name: "", user_id: event.user_id, date: event.date } */
+        editSlotsId: (state, action) => {
+            const oldServiceId = state.services.find((service) =>
+                service.slotsId.includes(action.payload.old_slot_id)
+            ).id;
+
+            const oldServiceIndex = state.services.findIndex(
+                (service) => service.id === oldServiceId
+            );
+            const editedService = {
+                ...state.services[oldServiceIndex],
+                slotsId: state.services[oldServiceIndex].slotsId.map((slotId) =>
+                    slotId === action.payload.old_slot_id
+                        ? action.payload.new_slot_id
+                        : slotId
+                )
+            };
+            state.services = state.services.map((service) =>
+                service.id === oldServiceId ? editedService : service
+            );
         }
     }
 });
-export const { loadServices, addService, getSlots } = servicesSlice.actions;
+export const { loadServices, getSlots, editSlotsId } = servicesSlice.actions;
 export default servicesSlice.reducer;

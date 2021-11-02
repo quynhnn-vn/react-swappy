@@ -1,6 +1,5 @@
 import { addDays, format, startOfWeek, getWeek } from "date-fns";
 import { fr } from "date-fns/locale";
-import slots from "./data/slots.json";
 import users from "./data/users.json";
 
 export const formatDate = (date) => {
@@ -30,7 +29,4 @@ export const getCurrentWeek = () => {
 export const getUser = (userId) => {
     const foundUser = users.find((user) => user.id === userId);
     return foundUser.last_name[0] + foundUser.first_name[0];
-};
-export const getColor = (slotId) => {
-    return slots.find((slot) => slot.id === slotId).color;
 };

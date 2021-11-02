@@ -38,37 +38,41 @@ export const slotsSlice = createSlice({
                 ]
             }));
         },
-        /* action.payload has form: 
-        {id: '456', user_id: '16', old_slot_id: '123', new_slot_id: '23', date: "2021-10-22"}
-        */
+        /* action.payload has form:
+        { id: event.id, old_slot_id: event.slot_id, new_slot_id: uuid(), slot_name: "", user_id: event.user_id, date: event.date } */
         editEventsId: (state, action) => {
+            const basicSlots = [
+                { name: "Matin", color: "#7F9CC7" },
+                { name: "Après-midi", color: "#2B4162" },
+                { name: "Soir", color: "#020969" }
+            ];
             const oldIndex = state.slots.findIndex(
                 (slot) => slot.id === action.payload.old_slot_id
             );
-            const newIndex = state.slots.findIndex(
-                (slot) => slot.id === action.payload.new_slot_id
-            );
+            const oldServiceId = state.slots[oldIndex].service_id;
             const editedOldSlot = {
                 ...state.slots[oldIndex],
                 eventsId: state.slots[oldIndex].eventsId.filter(
                     (eventId) => eventId !== action.payload.id
                 )
             };
-            const editedNewSlot = {
-                ...state.slots[newIndex],
-                eventsId: [...state.slots[newIndex].eventsId, action.payload.id]
+            const newSlot = {
+                id: action.payload.new_slot_id,
+                service_id: oldServiceId,
+                name: action.payload.slot_name,
+                color: basicSlots.find(
+                    (slot) => slot.name === action.payload.slot_name
+                ).color,
+                eventsId: [action.payload.id]
             };
+            state.slots.push(newSlot);
             state.slots = [
                 ...new Set(
-                    state.slots.map((slot) => {
-                        if (slot.id === action.payload.old_slot_id) {
-                            return editedOldSlot;
-                        } else if (slot.id === action.payload.new_slot_id) {
-                            return editedNewSlot;
-                        } else {
-                            return slot;
-                        }
-                    })
+                    state.slots.map((slot) =>
+                        slot.id === action.payload.old_slot_id
+                            ? editedOldSlot
+                            : slot
+                    )
                 )
             ];
         }

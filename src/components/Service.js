@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Day from "./Day";
 
@@ -7,20 +7,26 @@ export default function Service({ service }) {
     const slots = useSelector((state) => state.slots.slots);
     const events = useSelector((state) => state.events.events);
 
-    const slotsId = service.slotsId;
+    const [eventsForService, setEventsForService] = useState([]);
 
-    const eventsIdForSlot = slotsId.map((slotId) => {
-        const slot = slots.find((slot) => slot.id === slotId);
-        return slot.eventsId;
-    });
+    useEffect(() => {
+        const slotsId = service.slotsId;
 
-    const eventsForService = eventsIdForSlot
-        .map((eventsId) =>
-            eventsId.map((eventId) =>
-                events.filter((event) => event.id === eventId)
-            )
-        )
-        .flat(2);
+        const eventsIdForSlot = slotsId.map((slotId) => {
+            const slot = slots.find((slot) => slot.id === slotId);
+            return slot.eventsId;
+        });
+
+        setEventsForService(
+            eventsIdForSlot
+                .map((eventsId) =>
+                    eventsId.map((eventId) =>
+                        events.filter((event) => event.id === eventId)
+                    )
+                )
+                .flat(2)
+        );
+    }, [service.slotsId, slots, events]);
 
     return (
         <>

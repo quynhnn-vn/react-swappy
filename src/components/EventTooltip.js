@@ -5,24 +5,30 @@ import { editEventsAndUpdateSlot } from "../features/events/eventsSlice";
 
 export default function EventTooltip({ children, event }) {
     const dispatch = useDispatch();
+    const users = useSelector((state) => state.users.users);
 
     const [isEdited, setIsEdited] = useState(false);
     const [editedEvent, setEditedEvent] = useState({
         id: event.id,
         old_slot_id: event.slot_id,
-        new_slot_id: event.slot_id,
+        new_slot_id: Math.floor(Math.random() * 1000 + 18),
+        slot_name: "Matin",
         user_id: event.user_id,
         date: event.date
     });
 
-    const users = useSelector((state) => state.users.users);
-    const slots = useSelector((state) => state.slots.slots);
+    const basicSlots = [
+        { name: "Matin", color: "#7F9CC7" },
+        { name: "Après-midi", color: "#2B4162" },
+        { name: "Soir", color: "#020969" }
+    ];
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         dispatch(editEventsAndUpdateSlot(editedEvent));
         setIsEdited(false);
     };
+
     return (
         <div className="tooltip-container">
             <div className={isEdited ? "tooltip-box visible" : "tooltip-box"}>
@@ -31,16 +37,16 @@ export default function EventTooltip({ children, event }) {
                     <div className="input-container">
                         Créneau:
                         <select
-                            value={editedEvent.new_slot_id}
+                            value={editedEvent.slot_name}
                             onChange={(e) =>
                                 setEditedEvent({
                                     ...editedEvent,
-                                    new_slot_id: Number(e.target.value)
+                                    slot_name: e.target.value
                                 })
                             }
                         >
-                            {slots.map((slot) => (
-                                <option key={slot.id} value={slot.id}>
+                            {basicSlots.map((slot, index) => (
+                                <option key={index} value={slot.name}>
                                     {slot.name}
                                 </option>
                             ))}

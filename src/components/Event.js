@@ -1,11 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "../styles/Event.css";
-import { getUser, getColor } from "../utils";
+import { getUser } from "../utils";
 import EventTooltip from "./EventTooltip";
 
 export default function Event({ event }) {
+    const slots = useSelector((state) => state.slots.slots);
     const style = {
-        backgroundColor: getColor(event.slot_id)
+        backgroundColor: slots.find((slot) => slot.id === event.slot_id).color
     };
     return (
         <EventTooltip event={event}>
