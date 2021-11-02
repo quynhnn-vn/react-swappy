@@ -39,19 +39,20 @@ export const eventsSlice = createSlice({
         } 
         */
         editEvent: (state, action) => {
-            const index = state.events.findIndex(
-                (event) => event.id === action.payload.id
-            );
             const editedEvent = {
-                ...state.events[index],
+                id: action.payload.id,
                 slot_id: action.payload.new_slot_id,
                 user_id: action.payload.user_id,
-                date: action.payload.date
+                date: action.payload.new_date
             };
+
             state.events = [
                 ...new Set(
                     state.events.map((event) =>
-                        event.id === action.payload.id ? editedEvent : event
+                        event.id === action.payload.id &&
+                        event.date === action.payload.old_date
+                            ? editedEvent
+                            : event
                     )
                 )
             ];

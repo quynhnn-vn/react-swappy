@@ -6,7 +6,6 @@ export default function Service({ service }) {
     const week = useSelector((state) => state.week.week);
     const slots = useSelector((state) => state.slots.slots);
     const events = useSelector((state) => state.events.events);
-
     const [eventsForService, setEventsForService] = useState([]);
 
     useEffect(() => {

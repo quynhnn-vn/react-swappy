@@ -14,7 +14,8 @@ export default function EventTooltip({ children, event }) {
         new_slot_id: Math.floor(Math.random() * 1000 + 18),
         slot_name: "Matin",
         user_id: event.user_id,
-        date: event.date
+        old_date: event.date,
+        new_date: event.date
     });
 
     const basicSlots = [
@@ -74,11 +75,11 @@ export default function EventTooltip({ children, event }) {
                         Date:
                         <input
                             type="date"
-                            value={editedEvent.date}
+                            value={editedEvent.new_date}
                             onChange={(e) =>
                                 setEditedEvent({
                                     ...editedEvent,
-                                    date: e.target.value
+                                    new_date: e.target.value
                                 })
                             }
                         />

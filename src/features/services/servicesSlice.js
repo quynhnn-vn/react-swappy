@@ -36,7 +36,7 @@ export const servicesSlice = createSlice({
             }));
         },
         /* action.payload has form:
-        { id: event.id, old_slot_id: event.slot_id, new_slot_id: uuid(), slot_name: "", user_id: event.user_id, date: event.date } */
+        { id: "", old_slot_id: "", new_slot_id: "", slot_name: "", user_id: "", date: "" } */
         editSlotsId: (state, action) => {
             const oldServiceId = state.services.find((service) =>
                 service.slotsId.includes(action.payload.old_slot_id)
@@ -45,6 +45,7 @@ export const servicesSlice = createSlice({
             const oldServiceIndex = state.services.findIndex(
                 (service) => service.id === oldServiceId
             );
+
             const editedService = {
                 ...state.services[oldServiceIndex],
                 slotsId: state.services[oldServiceIndex].slotsId.map((slotId) =>

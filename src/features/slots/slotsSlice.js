@@ -39,7 +39,7 @@ export const slotsSlice = createSlice({
             }));
         },
         /* action.payload has form:
-        { id: event.id, old_slot_id: event.slot_id, new_slot_id: uuid(), slot_name: "", user_id: event.user_id, date: event.date } */
+        { id: "", old_slot_id: "", new_slot_id: "", slot_name: "", user_id: "", date: "" } */
         editEventsId: (state, action) => {
             const basicSlots = [
                 { name: "Matin", color: "#7F9CC7" },
