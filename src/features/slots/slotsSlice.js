@@ -42,49 +42,27 @@ export const slotsSlice = createSlice({
             slot_name: "Matin",
             user_id: event.user_id,
             date: event.date,
-            service_id: oldServiceId
         } 
         */
         editEventsId: (state, action) => {
             if (action.payload.old_slot_id !== action.payload.new_slot_id) {
-                const basicSlots = [
-                    { name: "Matin", color: "#7F9CC7" },
-                    { name: "Après-midi", color: "#2B4162" },
-                    { name: "Soir", color: "#020969" }
-                ];
-                const oldIndex = state.slots.findIndex(
+                const oldSlot = state.slots.find(
                     (slot) => slot.id === action.payload.old_slot_id
                 );
                 const editedOldSlot = {
-                    ...state.slots[oldIndex],
-                    eventsId: state.slots[oldIndex].eventsId.filter(
+                    ...oldSlot,
+                    eventsId: oldSlot.eventsId.filter(
                         (eventId) => eventId !== action.payload.id
                     )
                 };
-                const newIndex = state.slots.findIndex(
+                const newSlot = state.slots.find(
                     (slot) => slot.id === action.payload.new_slot_id
                 );
-                let editedNewSlot = {},
-                    newSlot = {};
-                newIndex
-                    ? (editedNewSlot = {
-                          ...state.slots[newIndex],
-                          eventsId: [
-                              ...state.slots[newIndex].eventsId,
-                              action.payload.id
-                          ]
-                      })
-                    : (newSlot = {
-                          id: action.payload.new_slot_id,
-                          service_id: action.payload.service_id,
-                          name: action.payload.slot_name,
-                          color: basicSlots.find(
-                              (slot) => slot.name === action.payload.slot_name
-                          ).color,
-                          eventsId: [action.payload.id]
-                      });
 
-                state.slots = [...state.slots, newSlot];
+                const editedNewSlot = {
+                    ...newSlot,
+                    eventsId: [...newSlot.eventsId, action.payload.id]
+                };
 
                 state.slots = state.slots.map((slot) => {
                     if (slot.id === action.payload.old_slot_id) {

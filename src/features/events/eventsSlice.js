@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import eventsData from "../../data/events.json";
 import { editEventsId } from "../slots/slotsSlice";
-import { editSlotsId } from "../services/servicesSlice";
 /*
 events: [
     {
@@ -12,9 +11,8 @@ events: [
     }
 ];
  */
-export const editEventsAndUpdateSlot = (payload) => {
+export const editEventAndUpdateSlots = (payload) => {
     return (dispatch) => {
-        dispatch(editSlotsId(payload));
         dispatch(editEventsId(payload));
         dispatch(editEvent(payload));
     };

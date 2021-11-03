@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "../styles/EventTooltip.css";
 import { useSelector, useDispatch } from "react-redux";
-import { editEventsAndUpdateSlot } from "../features/events/eventsSlice";
+import { editEventAndUpdateSlots } from "../features/events/eventsSlice";
 
 export default function EventTooltip({ children, event }) {
     const dispatch = useDispatch();
@@ -15,8 +15,7 @@ export default function EventTooltip({ children, event }) {
         new_slot_id: "",
         slot_name: "",
         user_id: "",
-        date: "",
-        serviceId: ""
+        date: ""
     });
 
     const index = slots.findIndex((slot) => slot.id === event.slot_id);
@@ -36,10 +35,9 @@ export default function EventTooltip({ children, event }) {
             new_slot_id: event.slot_id,
             slot_name: findSlotName(event.slot_id),
             user_id: event.user_id,
-            date: event.date,
-            service_id: serviceId
+            date: event.date
         });
-    }, [event, serviceId, findSlotName]);
+    }, [event, findSlotName]);
 
     const basicSlots = [
         { name: "Matin", color: "#7F9CC7" },
@@ -66,7 +64,7 @@ export default function EventTooltip({ children, event }) {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        dispatch(editEventsAndUpdateSlot(editedEvent));
+        dispatch(editEventAndUpdateSlots(editedEvent));
         setIsEdited(false);
     };
 

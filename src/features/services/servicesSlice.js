@@ -34,40 +34,8 @@ export const servicesSlice = createSlice({
                     .filter((slot) => slot.service_id === service.id)
                     .map((slot) => slot.id)
             }));
-        },
-        /* action.payload has form:
-        {
-            id: event.id,
-            old_slot_id: event.slot_id,
-            new_slot_id: event.slot_id,
-            slot_name: "Matin",
-            user_id: event.user_id,
-            date: event.date,
-            service_id: oldServiceId
-        } 
-        */
-        editSlotsId: (state, action) => {
-            const index = state.services.findIndex(
-                (service) => service.id === action.payload.service_id
-            );
-
-            const editedService = {
-                ...state.services[index],
-                slotsId: [
-                    ...new Set([
-                        ...state.services[index].slotsId,
-                        action.payload.new_slot_id
-                    ])
-                ]
-            };
-
-            state.services = state.services.map((service) =>
-                service.id === action.payload.service_id
-                    ? editedService
-                    : service
-            );
         }
     }
 });
-export const { loadServices, getSlots, editSlotsId } = servicesSlice.actions;
+export const { loadServices, getSlots } = servicesSlice.actions;
 export default servicesSlice.reducer;
