@@ -74,8 +74,45 @@ export const slotsSlice = createSlice({
                     }
                 });
             }
+        },
+        deleteEventId: (state, action) => {
+            const deleteIndex = state.slots.findIndex((slot) =>
+                slot.eventsId.includes(action.payload)
+            );
+            const deletedSlot = {
+                ...state.slots[deleteIndex],
+                eventsId: state.slots[deleteIndex].eventsId.filter(
+                    (eventId) => eventId !== action.payload
+                )
+            };
+            state.slots = state.slots.map((slot, index) =>
+                index === deleteIndex ? deletedSlot : slot
+            );
+        },
+        /* action.payload has form:
+        {
+            id: v4(),
+            service_id: 1,
+            user_id: 1,
+            slot_name: "Matin",
+            slot_id: 1,
+            date: formatDate(new Date())
+        } 
+        */
+        addEventId: (state, action) => {
+            const oldSlot = state.slots.find(
+                (slot) => slot.id === action.payload.slot_id
+            );
+            const editedOldSlot = {
+                ...oldSlot,
+                eventsId: [...oldSlot.eventsId, action.payload.id]
+            };
+            state.slots = state.slots.map((slot) =>
+                slot.id === action.payload.slot_id ? editedOldSlot : slot
+            );
         }
     }
 });
-export const { loadSlots, getEvents, editEventsId } = slotsSlice.actions;
+export const { loadSlots, getEvents, editEventsId, deleteEventId, addEventId } =
+    slotsSlice.actions;
 export default slotsSlice.reducer;

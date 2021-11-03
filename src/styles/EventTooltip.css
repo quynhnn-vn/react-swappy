@@ -7,7 +7,7 @@
     display: none;
     z-index: 100;
     background: var(--white);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px var(--dark-black);
     padding: 15px 25px;
     border-radius: 5px;
     left: 100%;
@@ -24,6 +24,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 7px 0;
+}
+.input-container label {
+    margin-right: 10px;
 }
 .input-container select {
     font-family: inherit;

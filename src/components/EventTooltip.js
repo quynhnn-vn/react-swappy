@@ -5,6 +5,8 @@ import {
     deleteEvent,
     editEventAndUpdateSlots
 } from "../features/events/eventsSlice";
+import { basicSlots } from "../utils";
+import { deleteEventId } from "../features/slots/slotsSlice";
 
 export default function EventTooltip({ children, event }) {
     const dispatch = useDispatch();
@@ -25,9 +27,7 @@ export default function EventTooltip({ children, event }) {
     const serviceId = slots[index].service_id;
 
     const findSlotName = useCallback(
-        (slotId) => {
-            return slots.find((slot) => slot.id === slotId).name;
-        },
+        (slotId) => slots.find((slot) => slot.id === slotId).name,
         [slots]
     );
 
@@ -42,12 +42,6 @@ export default function EventTooltip({ children, event }) {
         });
     }, [event, findSlotName]);
 
-    const basicSlots = [
-        { name: "Matin", color: "#7F9CC7" },
-        { name: "Après-midi", color: "#2B4162" },
-        { name: "Soir", color: "#020969" }
-    ];
-
     const findNewSlotId = (serviceId, slotName) => {
         const newSlot = slots.find(
             (slot) => slot.service_id === serviceId && slot.name === slotName
@@ -57,7 +51,7 @@ export default function EventTooltip({ children, event }) {
             : Number(Math.floor(Math.random() * 1000 + slots.length));
     };
 
-    const handleOnChangeSlot = (e) => {
+    const handleChangeSlot = (e) => {
         setEditedEvent({
             ...editedEvent,
             slot_name: e.target.value,
@@ -65,27 +59,28 @@ export default function EventTooltip({ children, event }) {
         });
     };
 
-    const handleOnSubmit = (e) => {
+    const handleSubmitEdit = (e) => {
         e.preventDefault();
         dispatch(editEventAndUpdateSlots(editedEvent));
         setIsEdited(false);
     };
 
-    const handleOnDelete = (e) => {
+    const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteEvent(event.id));
+        dispatch(deleteEventId(event.id));
         setIsEdited(false);
     };
     return (
         <div className="tooltip-container">
             <div className={isEdited ? "tooltip-box visible" : "tooltip-box"}>
-                <form onSubmit={handleOnSubmit}>
+                <form onSubmit={handleSubmitEdit}>
                     <h3>Modifier un event</h3>
                     <div className="input-container">
-                        Créneau:
+                        <label>Créneau</label>
                         <select
                             value={editedEvent.slot_name}
-                            onChange={handleOnChangeSlot}
+                            onChange={handleChangeSlot}
                         >
                             {basicSlots.map((slot, index) => (
                                 <option key={index} value={slot.name}>
@@ -95,7 +90,7 @@ export default function EventTooltip({ children, event }) {
                         </select>
                     </div>
                     <div className="input-container">
-                        Médecin:
+                        <label>Médecin</label>
                         <select
                             value={editedEvent.user_id}
                             onChange={(e) =>
@@ -113,7 +108,7 @@ export default function EventTooltip({ children, event }) {
                         </select>
                     </div>
                     <div className="input-container">
-                        Date:
+                        <label>Date</label>
                         <input
                             type="date"
                             value={editedEvent.date}
@@ -129,7 +124,7 @@ export default function EventTooltip({ children, event }) {
                     <input
                         type="button"
                         value="Supprimer"
-                        onClick={handleOnDelete}
+                        onClick={handleDelete}
                     />
                 </form>
             </div>

@@ -52,8 +52,28 @@ export const eventsSlice = createSlice({
             state.events = state.events.filter(
                 (event) => event.id !== action.payload
             );
+        },
+        /* action.payload has form:
+        {
+            id: v4(),
+            service_id: 1,
+            user_id: 1,
+            slot_name: "Matin",
+            slot_id: 1,
+            date: formatDate(new Date())
+        } 
+        */
+        addEvent: (state, action) => {
+            const newEvent = {
+                id: action.payload.id,
+                user_id: action.payload.user_id,
+                slot_id: action.payload.slot_id,
+                date: action.payload.date
+            };
+            state.events = [...state.events, newEvent];
         }
     }
 });
-export const { loadEvents, editEvent, deleteEvent } = eventsSlice.actions;
+export const { loadEvents, editEvent, deleteEvent, addEvent } =
+    eventsSlice.actions;
 export default eventsSlice.reducer;

@@ -1,7 +1,11 @@
 import { addDays, format, startOfWeek, getWeek } from "date-fns";
 import { fr } from "date-fns/locale";
 import users from "./data/users.json";
-
+export const basicSlots = [
+    { name: "Matin", color: "#7F9CC7" },
+    { name: "Après-midi", color: "#2B4162" },
+    { name: "Soir", color: "#020969" }
+];
 export const formatDate = (date) => {
     return format(new Date(date), "yyyy-MM-dd");
 };
