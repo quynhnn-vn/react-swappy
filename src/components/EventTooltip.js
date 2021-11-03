@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "../styles/EventTooltip.css";
 import { useSelector, useDispatch } from "react-redux";
-import { editEventAndUpdateSlots } from "../features/events/eventsSlice";
+import {
+    deleteEvent,
+    editEventAndUpdateSlots
+} from "../features/events/eventsSlice";
 
 export default function EventTooltip({ children, event }) {
     const dispatch = useDispatch();
@@ -68,6 +71,11 @@ export default function EventTooltip({ children, event }) {
         setIsEdited(false);
     };
 
+    const handleOnDelete = (e) => {
+        e.preventDefault();
+        dispatch(deleteEvent(event.id));
+        setIsEdited(false);
+    };
     return (
         <div className="tooltip-container">
             <div className={isEdited ? "tooltip-box visible" : "tooltip-box"}>
@@ -117,7 +125,12 @@ export default function EventTooltip({ children, event }) {
                             }
                         />
                     </div>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Envoyer" />
+                    <input
+                        type="button"
+                        value="Supprimer"
+                        onClick={handleOnDelete}
+                    />
                 </form>
             </div>
             <div onClick={() => setIsEdited(!isEdited)}>{children}</div>

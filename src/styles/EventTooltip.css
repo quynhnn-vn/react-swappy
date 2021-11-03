@@ -35,12 +35,13 @@
     height: 30px;
     width: 150px;
 }
-input[type="submit"] {
+input[type="submit"],
+input[type="button"] {
     font-family: inherit;
     height: 30px;
     padding: 0 10px;
-    margin: 7px auto;
-    background: var(--dark-black);
+    margin: 7px 5px;
+    background: var(--black);
     color: var(--white);
     border-radius: 5px;
     border: inherit;
@@ -48,4 +49,7 @@ input[type="submit"] {
 }
 input[type="submit"]:hover {
     background: var(--dark-blue);
+}
+input[type="button"]:hover {
+    background: var(--red);
 }

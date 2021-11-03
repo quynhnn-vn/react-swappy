@@ -47,8 +47,13 @@ export const eventsSlice = createSlice({
             state.events = state.events.map((event) =>
                 event.id === action.payload.id ? editedEvent : event
             );
+        },
+        deleteEvent: (state, action) => {
+            state.events = state.events.filter(
+                (event) => event.id !== action.payload
+            );
         }
     }
 });
-export const { loadEvents, editEvent } = eventsSlice.actions;
+export const { loadEvents, editEvent, deleteEvent } = eventsSlice.actions;
 export default eventsSlice.reducer;
