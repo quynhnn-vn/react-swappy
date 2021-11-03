@@ -1,28 +1,68 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../styles/EventTooltip.css";
 import { useSelector, useDispatch } from "react-redux";
 import { editEventsAndUpdateSlot } from "../features/events/eventsSlice";
 
 export default function EventTooltip({ children, event }) {
     const dispatch = useDispatch();
+    const slots = useSelector((state) => state.slots.slots);
     const users = useSelector((state) => state.users.users);
 
     const [isEdited, setIsEdited] = useState(false);
     const [editedEvent, setEditedEvent] = useState({
-        id: event.id,
-        old_slot_id: event.slot_id,
-        new_slot_id: Math.floor(Math.random() * 1000 + 18),
-        slot_name: "Matin",
-        user_id: event.user_id,
-        old_date: event.date,
-        new_date: event.date
+        id: "",
+        old_slot_id: "",
+        new_slot_id: "",
+        slot_name: "",
+        user_id: "",
+        date: "",
+        serviceId: ""
     });
+
+    const index = slots.findIndex((slot) => slot.id === event.slot_id);
+    const serviceId = slots[index].service_id;
+
+    const findSlotName = useCallback(
+        (slotId) => {
+            return slots.find((slot) => slot.id === slotId).name;
+        },
+        [slots]
+    );
+
+    useEffect(() => {
+        setEditedEvent({
+            id: event.id,
+            old_slot_id: event.slot_id,
+            new_slot_id: event.slot_id,
+            slot_name: findSlotName(event.slot_id),
+            user_id: event.user_id,
+            date: event.date,
+            service_id: serviceId
+        });
+    }, [event, serviceId, findSlotName]);
 
     const basicSlots = [
         { name: "Matin", color: "#7F9CC7" },
         { name: "Après-midi", color: "#2B4162" },
         { name: "Soir", color: "#020969" }
     ];
+
+    const findNewSlotId = (serviceId, slotName) => {
+        const newSlot = slots.find(
+            (slot) => slot.service_id === serviceId && slot.name === slotName
+        );
+        return newSlot
+            ? Number(newSlot.id)
+            : Number(Math.floor(Math.random() * 1000 + slots.length));
+    };
+
+    const handleOnChangeSlot = (e) => {
+        setEditedEvent({
+            ...editedEvent,
+            slot_name: e.target.value,
+            new_slot_id: findNewSlotId(serviceId, e.target.value)
+        });
+    };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -39,12 +79,7 @@ export default function EventTooltip({ children, event }) {
                         Créneau:
                         <select
                             value={editedEvent.slot_name}
-                            onChange={(e) =>
-                                setEditedEvent({
-                                    ...editedEvent,
-                                    slot_name: e.target.value
-                                })
-                            }
+                            onChange={handleOnChangeSlot}
                         >
                             {basicSlots.map((slot, index) => (
                                 <option key={index} value={slot.name}>
@@ -75,11 +110,11 @@ export default function EventTooltip({ children, event }) {
                         Date:
                         <input
                             type="date"
-                            value={editedEvent.new_date}
+                            value={editedEvent.date}
                             onChange={(e) =>
                                 setEditedEvent({
                                     ...editedEvent,
-                                    new_date: e.target.value
+                                    date: e.target.value
                                 })
                             }
                         />

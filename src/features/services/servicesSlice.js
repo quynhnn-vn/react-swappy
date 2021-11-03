@@ -36,26 +36,35 @@ export const servicesSlice = createSlice({
             }));
         },
         /* action.payload has form:
-        { id: "", old_slot_id: "", new_slot_id: "", slot_name: "", user_id: "", date: "" } */
+        {
+            id: event.id,
+            old_slot_id: event.slot_id,
+            new_slot_id: event.slot_id,
+            slot_name: "Matin",
+            user_id: event.user_id,
+            date: event.date,
+            service_id: oldServiceId
+        } 
+        */
         editSlotsId: (state, action) => {
-            const oldServiceId = state.services.find((service) =>
-                service.slotsId.includes(action.payload.old_slot_id)
-            ).id;
-
-            const oldServiceIndex = state.services.findIndex(
-                (service) => service.id === oldServiceId
+            const index = state.services.findIndex(
+                (service) => service.id === action.payload.service_id
             );
 
             const editedService = {
-                ...state.services[oldServiceIndex],
-                slotsId: state.services[oldServiceIndex].slotsId.map((slotId) =>
-                    slotId === action.payload.old_slot_id
-                        ? action.payload.new_slot_id
-                        : slotId
-                )
+                ...state.services[index],
+                slotsId: [
+                    ...new Set([
+                        ...state.services[index].slotsId,
+                        action.payload.new_slot_id
+                    ])
+                ]
             };
+
             state.services = state.services.map((service) =>
-                service.id === oldServiceId ? editedService : service
+                service.id === action.payload.service_id
+                    ? editedService
+                    : service
             );
         }
     }

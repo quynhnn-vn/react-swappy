@@ -8,7 +8,6 @@ import SwitchWeek from "./SwitchWeek";
 export default function Table() {
     const week = useSelector((state) => state.week.week);
     const services = useSelector((state) => state.services.services);
-    console.log(services);
     const renderDate = () =>
         week.dates &&
         ["CRÉNEAUX", ...week.dates].map((date, index) =>

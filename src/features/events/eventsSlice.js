@@ -14,9 +14,9 @@ events: [
  */
 export const editEventsAndUpdateSlot = (payload) => {
     return (dispatch) => {
-        dispatch(editEvent(payload));
-        dispatch(editEventsId(payload));
         dispatch(editSlotsId(payload));
+        dispatch(editEventsId(payload));
+        dispatch(editEvent(payload));
     };
 };
 export const eventsSlice = createSlice({
@@ -32,8 +32,8 @@ export const eventsSlice = createSlice({
         {
             id: event.id,
             old_slot_id: event.slot_id,
-            new_slot_id: uuid(),
-            slot_name: "",
+            new_slot_id: event.slot_id,
+            slot_name: "Matin",
             user_id: event.user_id,
             date: event.date
         } 
@@ -43,19 +43,12 @@ export const eventsSlice = createSlice({
                 id: action.payload.id,
                 slot_id: action.payload.new_slot_id,
                 user_id: action.payload.user_id,
-                date: action.payload.new_date
+                date: action.payload.date
             };
 
-            state.events = [
-                ...new Set(
-                    state.events.map((event) =>
-                        event.id === action.payload.id &&
-                        event.date === action.payload.old_date
-                            ? editedEvent
-                            : event
-                    )
-                )
-            ];
+            state.events = state.events.map((event) =>
+                event.id === action.payload.id ? editedEvent : event
+            );
         }
     }
 });
